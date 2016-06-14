@@ -1,0 +1,15 @@
+version: '2'
+services:
+  acd_rsync:
+    build: .
+    image: acd_rsync:latest
+    # Needed to mount FUSE
+    cap_add:
+      - SYS_ADMIN
+    volumes: 
+      - ./resources:/resources
+    devices:
+      - /dev/fuse:/dev/fuse
+    ports:
+      - "873:873"
+    env_file: .env
